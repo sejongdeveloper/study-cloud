@@ -8,3 +8,4 @@ spring:
       server:
         git:
           uri: https://github.com/sejongdeveloper/study-cloud-config.git
+

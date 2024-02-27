@@ -17,4 +17,9 @@ public class AccountApiController {
         return appProperties.getMessage();
     }
 
+    @GetMapping("/key")
+    public String getKey() {
+        return appProperties.getKey();
+    }
+
 }
