@@ -1,5 +1,6 @@
 package com.study.account.controller;
 
+import com.study.account.apiCaller.TodoApiCaller;
 import com.study.account.properties.AppProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AccountApiController {
     private final AppProperties appProperties;
+    private final TodoApiCaller todoApiCaller;
 
     @GetMapping("/message")
     public String getMessage() {
@@ -22,4 +24,8 @@ public class AccountApiController {
         return appProperties.getKey();
     }
 
+    @GetMapping("/todos/message")
+    public String getTodoTest() {
+        return todoApiCaller.getTest();
+    }
 }
