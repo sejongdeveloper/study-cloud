@@ -1,4 +1,4 @@
-package com.study.account.interfaces.account;
+package com.study.account.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
