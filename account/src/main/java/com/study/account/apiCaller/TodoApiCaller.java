@@ -6,5 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient(name = "todo")
 public interface TodoApiCaller {
     @GetMapping("/api/v1/todos/message")
-    String getTest();
+    String getMessage();
+
+    @GetMapping("/api/v1/todos/message-fail")
+    String getMessageFail();
 }
