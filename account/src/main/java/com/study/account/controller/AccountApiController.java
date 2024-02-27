@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountApiController {
     private final AppProperties appProperties;
 
-    @GetMapping("/hello")
-    public String hello() {
+    @GetMapping("/message")
+    public String getMessage() {
         return appProperties.getMessage();
     }
 
