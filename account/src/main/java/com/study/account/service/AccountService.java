@@ -3,16 +3,24 @@ package com.study.account.service;
 import com.study.account.apiCaller.TodoApiCaller;
 import com.study.account.kafka.KafkaProducer;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-public class AccountService {
+public class AccountService implements UserDetailsService {
     private final TodoApiCaller todoApiCaller;
     private final CircuitBreakerFactory circuitBreakerFactory;
     private final KafkaProducer kafkaProducer;
+    private final PasswordEncoder passwordEncoder;
 
     public String getTodoMessage() {
         kafkaProducer.send("message-count", 1);
@@ -28,5 +36,16 @@ public class AccountService {
 
     private static String getEmptyMessage() {
         return "empty message";
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        log.info("로그인 대상 계정 조회");
+        log.info("account service username={}", username);
+        String password = passwordEncoder.encode("1234");
+        return User.builder()
+                .username("user")
+                .password(password)
+                .build();
     }
 }

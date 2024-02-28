@@ -51,6 +51,8 @@ dependencies {
 	testImplementation 'io.github.openfeign:feign-micrometer:13.2.1'
 	implementation 'org.springframework.cloud:spring-cloud-starter-zipkin:2.2.8.RELEASE'
 
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 }
 
 dependencyManagement {
