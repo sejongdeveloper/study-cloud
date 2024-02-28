@@ -42,7 +42,8 @@ dependencies {
 	implementation 'io.micrometer:micrometer-tracing-bridge-brave:1.2.3'
 	implementation 'io.zipkin.reporter2:zipkin-reporter-brave:3.3.0'
 	testImplementation 'io.github.openfeign:feign-micrometer:13.2.1'
-	implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+	implementation 'org.springframework.cloud:spring-cloud-starter-zipkin:2.2.8.RELEASE'
+
 }
 
 dependencyManagement {
