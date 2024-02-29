@@ -1,6 +1,7 @@
 package com.study.account.config;
 
 import com.study.account.filter.AuthenticationFilter;
+import com.study.account.properties.TokenProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final TokenProperties tokenProperties;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -34,6 +36,6 @@ public class SecurityConfig {
 
     private AuthenticationFilter getAuthenticationFilter() throws Exception {
         AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
-        return new AuthenticationFilter(authenticationManager);
+        return new AuthenticationFilter(authenticationManager, tokenProperties);
     }
 }

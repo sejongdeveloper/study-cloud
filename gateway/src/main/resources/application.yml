@@ -23,3 +23,5 @@ spring:
           uri: http://localhost:8001
           predicates:
             - Path=/api/*/accounts/**
+          filters:
+            - AuthorizationHeaderFilter
