@@ -40,11 +40,9 @@ public class AccountService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("로그인 대상 계정 조회");
-        log.info("account service username={}", username);
         String password = passwordEncoder.encode("1234");
         return User.builder()
-                .username("user")
+                .username(username)
                 .password(password)
                 .build();
     }

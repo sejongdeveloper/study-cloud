@@ -15,4 +15,11 @@ spring:
         - id: account
           uri: http://localhost:8001
           predicates:
+            - Path=/api/v1/accounts/login
+            - Method=POST
+          filters:
+            - RewritePath=/api/v1/accounts/(?<segment>.*), /$\{segment}
+        - id: account
+          uri: http://localhost:8001
+          predicates:
             - Path=/api/*/accounts/**
