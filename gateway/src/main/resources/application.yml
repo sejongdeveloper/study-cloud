@@ -1,27 +1,42 @@
 server:
   port: 8000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
 spring:
   application:
     name: gateway
   cloud:
     gateway:
       routes:
-        - id: account
-          uri: http://localhost:8001
-          predicates:
-            - Path=/api/v1/accounts/actuator/**
-          filters:
-            - RewritePath=/api/v1/accounts/(?<segment>.*), /$\{segment}
-        - id: account
-          uri: http://localhost:8001
+        - id: account_login
+          uri: lb://ACCOUNT
           predicates:
             - Path=/api/v1/accounts/login
             - Method=POST
           filters:
             - RewritePath=/api/v1/accounts/(?<segment>.*), /$\{segment}
+
+        - id: account_actuator
+          uri: lb://ACCOUNT
+          predicates:
+            - Path=/api/v1/accounts/actuator/**
+          filters:
+            - RewritePath=/api/v1/accounts/(?<segment>.*), /$\{segment}
+
         - id: account
-          uri: http://localhost:8001
+          uri: lb://ACCOUNT
           predicates:
             - Path=/api/*/accounts/**
+          filters:
+            - AuthorizationHeaderFilter
+
+        - id: todo
+          uri: lb://TODO
+          predicates:
+            - Path=/api/*/todos/**
           filters:
             - AuthorizationHeaderFilter
